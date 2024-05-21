@@ -10,18 +10,18 @@
 }
 
 h1 {
-  font-size: 50px;
+  font-size: 30px;
   width: 98%;
   max-width: 900px;
 
   margin-left: auto;
   margin-right: auto;
 
-  text-align: left;
+  text-align: center;
   /* border-top: 1px solid #333;
   border-bottom: 1px solid #333; */
   margin-top: 105px;
-  font-weight: 400;
+  font-weight: 100;
   line-height: 1.1;
 }
 

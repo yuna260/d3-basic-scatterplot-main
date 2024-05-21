@@ -19,7 +19,7 @@ const yScale = d3.scaleLinear().range([height - margin.bottom, margin.top]);
 const radiusScale = d3.scaleSqrt().range([0, 55]);
 const colorScale = d3
   .scaleOrdinal()
-  .range(["#8160C8", "#FFA602", "#CDC0E4", "#cfcfcf"]);
+  .range(["yellowgreen", "coral", "skyblue", "orange"]);
 
 // axis
 
@@ -90,9 +90,9 @@ d3.csv("data/gapminder_combined.csv").then((raw_data) => {
         .style("left", event.pageX + 0 + "px")
         .style("top", event.pageY - 52 + "px")
         .style("display", "block")
-        .html(`${d.country}`);
+        .html(`${d.country}:${d.life_expectancy}`);
 
-      d3.select(this).style("stroke-width", 3).attr("stroke", "#111");
+      d3.select(this).style("stroke-width", 1).attr("stroke", "#111");
     })
     .on("mouseout", function () {
       tooltip.style("display", "none");
