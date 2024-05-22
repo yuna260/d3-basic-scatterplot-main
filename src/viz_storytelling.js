@@ -201,6 +201,8 @@ d3.csv("data/gapminder_combined.csv")
             ? colorScale(d.region)
             : "rgba(0,0,0,0.1)";
         } else {
+          usSelected = false;
+
           return colorScale(d.region);
         }
       });

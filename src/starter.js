@@ -42,6 +42,13 @@ const tooltip = d3
 let data = [];
 let circles;
 let region;
+let legendTexts;
+let legendRects;
+
+let asiaSelected = false;
+let chinaSelected = false;
+let usSelected = false;
+let africaSelected = false;
 
 d3.csv("data/gapminder_combined.csv").then((raw_data) => {
   console.log(raw_data);
@@ -75,6 +82,28 @@ d3.csv("data/gapminder_combined.csv").then((raw_data) => {
     .attr("transform", `translate(${margin.left}, 0)`)
     .call(yAxis);
 
+  // Legend
+  legendRects = svg
+    .selectAll("legend-rects")
+    .data(region)
+    .enter()
+    .append("rect")
+    .attr("x", (d, i) => width - margin.right - 83)
+    .attr("y", (d, i) => height - margin.bottom - 70 - 25 * i)
+    .attr("width", 12)
+    .attr("height", 17)
+    .attr("fill", (d) => colorScale(d));
+
+  legendTexts = svg
+    .selectAll("legend-texts")
+    .data(region)
+    .enter()
+    .append("text")
+    .attr("x", (d, i) => width - margin.right - 83 + 20)
+    .attr("y", (d, i) => height - margin.bottom - 70 - 25 * i + 15)
+    .text((d) => d)
+    .attr("class", "legend-texts");
+
   circles = svg
     .selectAll("circles")
     .data(data)
@@ -98,4 +127,95 @@ d3.csv("data/gapminder_combined.csv").then((raw_data) => {
       tooltip.style("display", "none");
       d3.select(this).style("stroke-width", 1).attr("stroke", "#fff");
     });
+
+  //   // button asia
+  d3.select("#button-asia").on("click", () => {
+    asiaSelected = !asiaSelected;
+    chinaSelected = false;
+    usSelected = false;
+    africaSelected = false;
+
+    d3.select("#text-desc").text("Asia Selected");
+    d3.select("#button-asia").classed("button-clicked", asiaSelected);
+    d3.select("#button-china").classed("button-clicked", false);
+    d3.select("#button-us").classed("button-clicked", false);
+
+    circles.attr("fill", (d) => {
+      if (asiaSelected) {
+        return d.region == "asia" ? colorScale(d.region) : "rgba(0,0,0,0.1)";
+      } else {
+        d3.select("#text-desc").text("");
+        return colorScale(d.region);
+      }
+    });
+  });
+
+  //   // button africa
+  d3.select("#button-africa").on("click", () => {
+    africaSelected = !africaSelected;
+    chinaSelected = false;
+    usSelected = false;
+    asiaSelected = false;
+
+    d3.select("#text-desc").text("Africa Selected");
+    d3.select("#button-africa").classed("button-clicked", africaSelected);
+    d3.select("#button-china").classed("button-clicked", false);
+    d3.select("#button-us").classed("button-clicked", false);
+    d3.select("#button-asia").classed("button-clicked", false);
+
+    circles.attr("fill", (d) => {
+      if (africaSelected) {
+        return d.region == "africa" ? colorScale(d.region) : "rgba(0,0,0,0.1)";
+      } else {
+        d3.select("#text-desc").text("");
+        return colorScale(d.region);
+      }
+    });
+  });
+
+  // button china
+  d3.select("#button-china").on("click", () => {
+    chinaSelected = !chinaSelected;
+    asiaSelected = false;
+    usSelected = false;
+    africaSelected = false;
+
+    d3.select("#text-desc").text("China Selected");
+    d3.select("#button-china").classed("button-clicked", chinaSelected);
+    d3.select("#button-asia").classed("button-clicked", false);
+    d3.select("#button-us").classed("button-clicked", false);
+
+    circles.attr("fill", (d) => {
+      if (chinaSelected) {
+        return d.country == "China" ? colorScale(d.region) : "rgba(0,0,0,0.1)";
+      } else {
+        d3.select("#text-desc").text("");
+        return colorScale(d.region);
+      }
+    });
+  });
+
+  // button us
+  d3.select("#button-us").on("click", () => {
+    usSelected = !usSelected;
+    asiaSelected = false;
+    chinaSelected = false;
+    africaSelected = false;
+
+    d3.select("#text-desc").text("US Selected");
+    d3.select("#button-us").classed("button-clicked", usSelected);
+    d3.select("#button-asia").classed("button-clicked", false);
+    d3.select("#button-china").classed("button-clicked", false);
+
+    circles.attr("fill", (d) => {
+      if (usSelected) {
+        return d.country == "United States"
+          ? colorScale(d.region)
+          : "rgba(0,0,0,0.1)";
+      } else {
+        d3.select("#text-desc").text("");
+        return colorScale(d.region);
+      }
+    });
+  });
 });

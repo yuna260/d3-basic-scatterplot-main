@@ -6,6 +6,14 @@
   margin-left: auto;
   margin-right: auto;
 }
+#text-desc {
+  font-weight: 200;
+  width: 98%;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 20px;
+}
 
 #svg {
   width: 100%;
