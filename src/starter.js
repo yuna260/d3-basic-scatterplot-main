@@ -139,7 +139,7 @@ d3.csv("data/gapminder_combined.csv").then((raw_data) => {
     d3.select("#button-asia").classed("button-clicked", asiaSelected);
     d3.select("#button-china").classed("button-clicked", false);
     d3.select("#button-us").classed("button-clicked", false);
-
+    d3.select("#button-africa").classed("button-clicked", false);
     circles.attr("fill", (d) => {
       if (asiaSelected) {
         return d.region == "asia" ? colorScale(d.region) : "rgba(0,0,0,0.1)";
@@ -184,6 +184,7 @@ d3.csv("data/gapminder_combined.csv").then((raw_data) => {
     d3.select("#button-china").classed("button-clicked", chinaSelected);
     d3.select("#button-asia").classed("button-clicked", false);
     d3.select("#button-us").classed("button-clicked", false);
+    d3.select("#button-africa").classed("button-clicked", false);
 
     circles.attr("fill", (d) => {
       if (chinaSelected) {
@@ -206,7 +207,7 @@ d3.csv("data/gapminder_combined.csv").then((raw_data) => {
     d3.select("#button-us").classed("button-clicked", usSelected);
     d3.select("#button-asia").classed("button-clicked", false);
     d3.select("#button-china").classed("button-clicked", false);
-
+    d3.select("#button-africa").classed("button-clicked", false);
     circles.attr("fill", (d) => {
       if (usSelected) {
         return d.country == "United States"
